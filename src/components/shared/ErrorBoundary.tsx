@@ -33,7 +33,7 @@ export default class ErrorBoundary extends Component<Props, State> {
                 this.setState({ hasError: false });
                 window.location.reload();
               }}
-              className="px-6 py-3 text-sm text-violet-300 border border-violet-400/30 rounded-xl hover:bg-violet-500/10 transition-colors"
+              className="px-6 py-3 text-sm text-amber-300 border border-amber-400/30 rounded-xl hover:bg-amber-500/10 transition-colors"
             >
               刷新页面
             </button>

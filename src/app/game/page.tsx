@@ -135,7 +135,7 @@ export default function GamePage() {
           </div>
 
           {/* Action bar */}
-          <div className="flex-shrink-0 border-t border-white/5 bg-[#0a0a0f]/80 backdrop-blur-xl">
+          <div className="flex-shrink-0 border-t border-white/5 bg-[#141311]/80 backdrop-blur-xl">
             {/* Guessing phase: confirm button */}
             {isGuessingPhase && (
               <GuessConfirmation
@@ -148,8 +148,8 @@ export default function GamePage() {
             {/* Confirming phase: show waiting state */}
             {isConfirmingPhase && (
               <div className="flex items-center justify-center p-4">
-                <p className="text-sm text-violet-300/40 flex items-center gap-2">
-                  <span className="w-4 h-4 border-2 border-violet-400/30 border-t-violet-400 rounded-full animate-spin" />
+                <p className="text-sm text-amber-300/40 flex items-center gap-2">
+                  <span className="w-4 h-4 border-2 border-amber-400/30 border-t-amber-400 rounded-full animate-spin" />
                   计算中...
                 </p>
               </div>

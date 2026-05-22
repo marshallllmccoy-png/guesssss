@@ -49,7 +49,7 @@ function RoundItem({ result, index }: { result: RoundResult; index: number }) {
                   ? `${(result.distanceKm * 1000).toFixed(0)} m`
                   : `${result.distanceKm.toFixed(0)} km`}
               </p>
-              <p className="text-sm text-violet-300 font-semibold tabular-nums">
+              <p className="text-sm text-amber-300 font-semibold tabular-nums">
                 {result.score.toLocaleString()} 分
               </p>
             </div>

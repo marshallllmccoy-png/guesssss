@@ -33,14 +33,14 @@ export default function StartButton() {
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.97 }}
         className="relative group px-12 py-5 text-lg font-semibold rounded-2xl
-          bg-violet-500/20 backdrop-blur-xl border border-violet-400/30
-          text-violet-100 cursor-pointer overflow-hidden
-          hover:bg-violet-500/30 transition-colors"
+          bg-amber-500/20 backdrop-blur-xl border border-amber-400/30
+          text-amber-100 cursor-pointer overflow-hidden
+          hover:bg-amber-500/30 transition-colors"
         style={{ minHeight: 56 }}
       >
         {/* Glow on hover */}
         <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300
-          bg-gradient-to-r from-violet-500/10 via-transparent to-violet-500/10" />
+          bg-gradient-to-r from-amber-500/10 via-transparent to-amber-500/10" />
 
         <span className="relative z-10 flex items-center gap-3">
           开始游戏

@@ -62,7 +62,7 @@ export default function ResultReveal({
           <div className="text-center mb-4">
             <AnimatedNumber
               value={score}
-              className="text-5xl font-bold text-violet-300 tabular-nums"
+              className="text-5xl font-bold text-amber-300 tabular-nums"
             />
             <p className="text-xs text-white/20 mt-1">本轮得分</p>
           </div>

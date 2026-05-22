@@ -11,7 +11,7 @@ interface LocationImageProps {
 export default function LocationImage({ src, alt, className = '' }: LocationImageProps) {
   if (!src) {
     return (
-      <div className={`${className} bg-gradient-to-br from-violet-900/20 to-indigo-900/20 flex items-center justify-center`}>
+      <div className={`${className} bg-gradient-to-br from-amber-900/20 to-amber-900/20 flex items-center justify-center`}>
         <p className="text-white/20 text-sm">图片加载中...</p>
       </div>
     );
@@ -32,7 +32,7 @@ export default function LocationImage({ src, alt, className = '' }: LocationImag
           target.style.display = 'none';
           const parent = target.parentElement;
           if (parent) {
-            parent.classList.add('bg-gradient-to-br', 'from-violet-900/20', 'to-indigo-900/20', 'flex', 'items-center', 'justify-center');
+            parent.classList.add('bg-gradient-to-br', 'from-amber-900/20', 'to-amber-900/20', 'flex', 'items-center', 'justify-center');
             const text = document.createElement('p');
             text.className = 'text-white/20 text-sm';
             text.textContent = '图片加载中...';

@@ -21,7 +21,7 @@ function makeGuessIcon(isReveal: boolean) {
   const s = isReveal ? 18 : 22;
   return L.divIcon({
     className: '',
-    html: `<div style="width:${s}px;height:${s}px;background:#a78bfa;border:2px solid #fff;border-radius:50%;box-shadow:0 0 14px rgba(167,139,250,0.5)"></div>`,
+    html: `<div style="width:${s}px;height:${s}px;background:#f59e0b;border:2px solid #fff;border-radius:50%;box-shadow:0 0 14px rgba(245,158,11,0.5)"></div>`,
     iconSize: [s, s],
     iconAnchor: [s / 2, s / 2],
   });
@@ -195,7 +195,7 @@ export default function GuessMap({
     if (polylineRef.current) { map.removeLayer(polylineRef.current); }
     polylineRef.current = L.polyline(
       [[guessPosition.lat, guessPosition.lng], [realLocation.lat, realLocation.lng]],
-      { color: '#a78bfa', weight: 2, opacity: 0.7, dashArray: '10, 5' }
+      { color: '#f59e0b', weight: 2, opacity: 0.7, dashArray: '10, 5' }
     ).addTo(map);
 
     const bounds = L.latLngBounds([
@@ -226,7 +226,7 @@ export default function GuessMap({
       <div
         ref={containerRef}
         className="w-full h-full"
-        style={{ minHeight: 300, background: '#0f0f15', touchAction: isLocked ? 'auto' : 'none' }}
+        style={{ minHeight: 300, background: '#1c1a17', touchAction: isLocked ? 'auto' : 'none' }}
       />
     </motion.div>
   );

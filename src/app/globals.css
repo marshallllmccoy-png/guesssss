@@ -1,8 +1,8 @@
 @import 'tailwindcss';
 
 @theme inline {
-  --color-background: #0a0a0f;
-  --color-foreground: #ededed;
+  --color-background: #141311;
+  --color-foreground: #f5f0e8;
   --font-sans: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Noto Sans SC', 'Helvetica Neue', sans-serif;
 }
 
@@ -15,8 +15,8 @@ html {
 }
 
 body {
-  background: #0a0a0f;
-  color: #ededed;
+  background: #141311;
+  color: #f5f0e8;
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -57,6 +57,6 @@ body {
 
 /* Leaflet overrides */
 .leaflet-container {
-  background: #0f0f15;
+  background: #1c1a17;
   font-family: var(--font-sans);
 }

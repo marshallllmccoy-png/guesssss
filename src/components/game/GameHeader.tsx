@@ -24,7 +24,7 @@ export default function GameHeader({ round, totalRounds, score }: GameHeaderProp
       </div>
       <div className="flex items-center gap-2">
         <span className="text-xs text-white/30 uppercase tracking-wider">得分</span>
-        <span className="text-lg font-semibold text-violet-300 tabular-nums">{score.toLocaleString()}</span>
+        <span className="text-lg font-semibold text-amber-300 tabular-nums">{score.toLocaleString()}</span>
       </div>
     </motion.div>
   );
