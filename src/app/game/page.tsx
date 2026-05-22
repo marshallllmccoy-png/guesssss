@@ -16,6 +16,8 @@ import RoundTransition from '@/components/game/RoundTransition';
 import LoadingSpinner from '@/components/ui/LoadingSpinner';
 import Skeleton from '@/components/ui/Skeleton';
 import { TOTAL_ROUNDS } from '@/lib/constants';
+import { useSeenImages } from '@/hooks/useSeenImages';
+import GalleryExhausted from '@/components/game/GalleryExhausted';
 
 const GuessMap = dynamic(() => import('@/components/game/GuessMap'), {
   ssr: false,
@@ -26,6 +28,7 @@ export default function GamePage() {
   const router = useRouter();
   const game = useGameState();
   const { state, startGame, loadCurrentLocation, placeGuess, confirmGuess, completeReveal, startTransition, nextRound, endGame, restoreState } = game;
+  const { seenIds, markAsSeen, isHydrated } = useSeenImages();
 
   // Persist game state
   const { clearGameData } = useGamePersistence(state, restoreState, () => {
@@ -34,10 +37,10 @@ export default function GamePage() {
 
   // Start game if no saved state
   useEffect(() => {
-    if (state.phase === GamePhase.IDLE) {
-      startGame();
+    if (state.phase === GamePhase.IDLE && isHydrated) {
+      startGame(seenIds);
     }
-  }, [state.phase, startGame]);
+  }, [state.phase, startGame, seenIds, isHydrated]);
 
   // Load location when entering LOADING_LOCATION phase
   useEffect(() => {
@@ -67,6 +70,13 @@ export default function GamePage() {
     return () => clearTimeout(timer);
   }, [state.phase, state.currentGuess, state.selectedLocation, completeReveal]);
 
+  // Mark current location as seen when reveal completes
+  useEffect(() => {
+    if (state.phase === GamePhase.REVEALING_RESULT && state.selectedLocation) {
+      markAsSeen(state.selectedLocation.id);
+    }
+  }, [state.phase, state.selectedLocation, markAsSeen]);
+
   // Handle game over
   useEffect(() => {
     if (state.phase === GamePhase.GAME_COMPLETE) {
@@ -81,6 +91,11 @@ export default function GamePage() {
         <LoadingSpinner />
       </div>
     );
+  }
+
+  // GALLERY_EXHAUSTED state
+  if (state.phase === GamePhase.GALLERY_EXHAUSTED) {
+    return <GalleryExhausted />;
   }
 
   const showLocation =

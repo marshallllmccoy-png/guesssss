@@ -76,7 +76,7 @@ export function useGamePersistence(
   useEffect(() => {
     if (state.phase === GamePhase.IDLE) {
       const saved = loadGameState();
-      if (saved && saved.phase !== GamePhase.GAME_COMPLETE && saved.phase !== GamePhase.IDLE) {
+      if (saved && saved.phase !== GamePhase.GAME_COMPLETE && saved.phase !== GamePhase.IDLE && saved.phase !== GamePhase.GALLERY_EXHAUSTED) {
         restoreState(saved);
       }
     }
@@ -85,7 +85,7 @@ export function useGamePersistence(
 
   // Save on state change
   useEffect(() => {
-    if (state.phase !== GamePhase.IDLE) {
+    if (state.phase !== GamePhase.IDLE && state.phase !== GamePhase.GALLERY_EXHAUSTED) {
       saveGameState(state);
     }
   }, [state]);
