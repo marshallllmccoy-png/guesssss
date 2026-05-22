@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build && cp -r public .next/standalone/ && cp -r .next/static .next/standalone/.next/",
-    "start": "HOSTNAME=0.0.0.0 node .next/standalone/server.js",
+    "build": "next build",
+    "start": "next start -H 0.0.0.0",
     "lint": "eslint",
     "collect": "tsx scripts/collector/collect.ts"
   },
