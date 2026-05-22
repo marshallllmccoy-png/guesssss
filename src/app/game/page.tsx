@@ -75,7 +75,7 @@ export default function GamePage() {
     if (state.phase === GamePhase.REVEALING_RESULT && state.selectedLocation) {
       markAsSeen(state.selectedLocation.id);
     }
-  }, [state.phase, state.selectedLocation, markAsSeen]);
+  }, [state.phase, state.selectedLocation?.id, markAsSeen]);
 
   // Handle game over
   useEffect(() => {
