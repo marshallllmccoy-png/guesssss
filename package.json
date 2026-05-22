@@ -26,6 +26,9 @@
     "axios": "^1.16.1",
     "eslint": "^9",
     "eslint-config-next": "16.2.6",
+    "node-addon-api": "^8.7.0",
+    "node-gyp": "^12.3.0",
+    "sharp": "^0.33.5",
     "tailwindcss": "^4",
     "tsx": "^4.22.3",
     "typescript": "^5"
