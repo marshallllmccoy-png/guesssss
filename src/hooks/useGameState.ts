@@ -3,7 +3,7 @@
 import { useReducer, useCallback } from 'react';
 import { GameState, GamePhase, GameAction, RoundResult } from '@/types/game';
 import { LocationData } from '@/types/location';
-import { locations, getRandomLocations } from '@/data/locations';
+import { locations, getUnseenRandomLocations } from '@/data/locations';
 import { TOTAL_ROUNDS } from '@/lib/constants';
 
 function createGameId(): string {
@@ -98,6 +98,9 @@ function gameReducer(state: GameState, action: GameAction): GameState {
     case 'GAME_OVER':
       return { ...state, phase: GamePhase.GAME_COMPLETE };
 
+    case 'GALLERY_EXHAUSTED':
+      return { ...state, phase: GamePhase.GALLERY_EXHAUSTED };
+
     case 'RESTORE_STATE':
       return { ...action.state };
 
@@ -109,9 +112,13 @@ function gameReducer(state: GameState, action: GameAction): GameState {
 export function useGameState() {
   const [state, dispatch] = useReducer(gameReducer, null, createInitialState);
 
-  const startGame = useCallback(() => {
-    const order = getRandomLocations(TOTAL_ROUNDS);
-    dispatch({ type: 'START_GAME', roundOrder: order });
+  const startGame = useCallback((seenIds: string[]) => {
+    const order = getUnseenRandomLocations(TOTAL_ROUNDS, seenIds);
+    if (order.length === 0) {
+      dispatch({ type: 'GALLERY_EXHAUSTED' });
+    } else {
+      dispatch({ type: 'START_GAME', roundOrder: order });
+    }
   }, []);
 
   const loadCurrentLocation = useCallback(() => {

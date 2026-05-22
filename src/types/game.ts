@@ -40,4 +40,5 @@ export type GameAction =
   | { type: 'START_TRANSITION' }
   | { type: 'NEXT_ROUND' }
   | { type: 'GAME_OVER' }
+  | { type: 'GALLERY_EXHAUSTED' }
   | { type: 'RESTORE_STATE'; state: GameState };
