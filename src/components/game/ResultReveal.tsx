@@ -29,21 +29,12 @@ export default function ResultReveal({
 }: ResultRevealProps) {
   return (
     <motion.div
-      className="fixed inset-0 z-30 flex items-end justify-center pb-8 px-4"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
+      className="w-full px-4 pb-8"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4 }}
     >
-      {/* Backdrop */}
-      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
-
-      {/* Card */}
-      <motion.div
-        className="relative w-full max-w-lg"
-        initial={{ y: '100%' }}
-        animate={{ y: 0 }}
-        transition={{ ...SPRING_SLOW, duration: 0.6 }}
-      >
+      <div className="w-full max-w-lg mx-auto">
         <GlassCard className="p-6">
           {/* Header */}
           <div className="text-center mb-4">
@@ -85,7 +76,7 @@ export default function ResultReveal({
             )}
           </div>
         </GlassCard>
-      </motion.div>
+      </div>
     </motion.div>
   );
 }

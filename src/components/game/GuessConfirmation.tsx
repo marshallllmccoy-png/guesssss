@@ -37,7 +37,7 @@ export default function GuessConfirmation({ onConfirm, hasGuess, isLoading }: Gu
           onClick={onConfirm}
           disabled={!hasGuess}
           loading={isLoading}
-          className="shadow-lg shadow-amber-500/20"
+          className="shadow-lg shadow-red-500/15"
         >
           确认猜测
         </GlassButton>

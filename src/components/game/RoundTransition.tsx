@@ -30,7 +30,7 @@ export default function RoundTransition({ roundNumber, onComplete }: RoundTransi
   return (
     <AnimatePresence>
       <motion.div
-        className="fixed inset-0 z-50 flex items-center justify-center bg-[#141311]"
+        className="fixed inset-0 z-50 flex items-center justify-center bg-[#0d0b08]"
         initial={{ scaleY: 0, originY: 1 }}
         animate={
           phase === 'exit'

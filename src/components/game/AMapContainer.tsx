@@ -105,7 +105,7 @@ export default function AMapContainer({
         <p className="text-white/40 text-sm mb-4">地图加载失败，请使用下方输入框</p>
         <button
           onClick={retry}
-          className="px-4 py-2 text-sm text-amber-300 border border-amber-400/30 rounded-xl hover:bg-amber-500/10 transition-colors"
+          className="px-4 py-2 text-sm text-red-200 border border-red-400/25 rounded-xl hover:bg-red-500/10 transition-colors"
         >
           重试
         </button>

@@ -62,7 +62,7 @@ export default function GameRules() {
             transition={{ ...SPRING_GENTLE, delay: i * 0.15 }}
           >
             <GlassCard className="p-8 text-center h-full">
-              <div className="text-amber-400 mb-5 flex justify-center">{rule.icon}</div>
+              <div className="text-red-400 mb-5 flex justify-center">{rule.icon}</div>
               <h3 className="text-lg font-semibold text-white/90 mb-3">{rule.title}</h3>
               <p className="text-sm text-white/40 leading-relaxed">{rule.desc}</p>
             </GlassCard>

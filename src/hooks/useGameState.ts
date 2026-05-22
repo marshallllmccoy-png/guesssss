@@ -72,11 +72,14 @@ function gameReducer(state: GameState, action: GameAction): GameState {
       };
       return {
         ...state,
-        phase: GamePhase.ROUND_TRANSITION,
+        phase: GamePhase.REVEALING_RESULT,
         roundResults: [...state.roundResults, result],
         totalScore: state.totalScore + action.score,
       };
     }
+
+    case 'START_TRANSITION':
+      return { ...state, phase: GamePhase.ROUND_TRANSITION };
 
     case 'NEXT_ROUND': {
       const nextIndex = state.currentRoundIndex + 1;
@@ -130,6 +133,10 @@ export function useGameState() {
     dispatch({ type: 'REVEAL_COMPLETE', distance, score });
   }, []);
 
+  const startTransition = useCallback(() => {
+    dispatch({ type: 'START_TRANSITION' });
+  }, []);
+
   const nextRound = useCallback(() => {
     dispatch({ type: 'NEXT_ROUND' });
   }, []);
@@ -150,6 +157,7 @@ export function useGameState() {
     placeGuess,
     confirmGuess,
     completeReveal,
+    startTransition,
     nextRound,
     endGame,
     restoreState,

@@ -8,7 +8,7 @@ export default function NotFound() {
         <h2 className="text-xl text-white/40 mb-6">这个页面不存在</h2>
         <Link
           href="/"
-          className="px-6 py-3 text-sm text-amber-300 border border-amber-400/30 rounded-xl hover:bg-amber-500/10 transition-colors"
+          className="px-6 py-3 text-sm text-red-200 border border-red-400/25 rounded-xl hover:bg-red-500/10 transition-colors"
         >
           返回首页
         </Link>

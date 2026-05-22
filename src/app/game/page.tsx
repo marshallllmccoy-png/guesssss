@@ -25,7 +25,7 @@ const GuessMap = dynamic(() => import('@/components/game/GuessMap'), {
 export default function GamePage() {
   const router = useRouter();
   const game = useGameState();
-  const { state, startGame, loadCurrentLocation, placeGuess, confirmGuess, completeReveal, nextRound, endGame, restoreState } = game;
+  const { state, startGame, loadCurrentLocation, placeGuess, confirmGuess, completeReveal, startTransition, nextRound, endGame, restoreState } = game;
 
   // Persist game state
   const { clearGameData } = useGamePersistence(state, restoreState, () => {
@@ -87,6 +87,8 @@ export default function GamePage() {
     state.phase !== GamePhase.ROUND_TRANSITION &&
     state.phase !== GamePhase.GAME_COMPLETE;
 
+  const isRevealing = state.phase === GamePhase.REVEALING_RESULT;
+
   const isGuessingPhase =
     state.phase === GamePhase.SHOWING_LOCATION ||
     state.phase === GamePhase.GUESSING;
@@ -107,59 +109,66 @@ export default function GamePage() {
       />
 
       {/* Main content */}
-      <div className="flex-1 flex flex-col lg:flex-row gap-0">
-        {/* Left: Location image */}
-        {showLocation && (
-          <LocationImage
-            src={state.selectedLocation?.imageUrl}
-            alt={state.selectedLocation ? `${state.selectedLocation.city} · ${state.selectedLocation.province}` : ''}
-            className="w-full lg:w-[50vw] h-[35vh] lg:h-[calc(100vh-144px)]"
-          />
-        )}
-
-        {/* Right: Map + Controls */}
-        <div className="w-full lg:flex-1 flex flex-col h-[50vh] lg:h-[calc(100vh-144px)]">
-          {/* Map */}
-          <div className="flex-1 relative">
-            <GuessMap
-              phase={state.phase}
-              onGuess={(lat, lng) => placeGuess(lat, lng)}
-              guessPosition={state.currentGuess}
-              realLocation={
-                state.phase === GamePhase.REVEALING_RESULT && state.selectedLocation
-                  ? { lat: state.selectedLocation.latitude, lng: state.selectedLocation.longitude }
-                  : null
-              }
-              className="w-full h-full"
-            />
-          </div>
-
-          {/* Action bar */}
-          <div className="flex-shrink-0 border-t border-white/5 bg-[#141311]/80 backdrop-blur-xl">
-            {/* Guessing phase: confirm button */}
-            {isGuessingPhase && (
-              <GuessConfirmation
-                onConfirm={() => confirmGuess()}
-                hasGuess={!!state.currentGuess}
-                isLoading={isConfirmingPhase}
+      {showLocation && (
+        <div className="flex-1 flex flex-col">
+          <div className={`flex flex-col ${isRevealing ? '' : 'lg:flex-row'} gap-0`}>
+            {/* Image: hidden during reveal */}
+            {!isRevealing && (
+              <LocationImage
+                src={state.selectedLocation?.imageUrl}
+                alt={state.selectedLocation ? `${state.selectedLocation.city} · ${state.selectedLocation.province}` : ''}
+                className="w-full lg:w-[50vw] h-[35vh] lg:h-[calc(100vh-144px)]"
               />
             )}
 
-            {/* Confirming phase: show waiting state */}
-            {isConfirmingPhase && (
-              <div className="flex items-center justify-center p-4">
-                <p className="text-sm text-amber-300/40 flex items-center gap-2">
-                  <span className="w-4 h-4 border-2 border-amber-400/30 border-t-amber-400 rounded-full animate-spin" />
-                  计算中...
-                </p>
-              </div>
-            )}
+            {/* Map: shrinks during reveal */}
+            <div
+              className={`w-full relative ${
+                isRevealing
+                  ? 'h-[40vh] lg:h-[45vh] flex-shrink-0'
+                  : 'lg:flex-1 h-[50vh] lg:h-[calc(100vh-144px)]'
+              }`}
+            >
+              <GuessMap
+                phase={state.phase}
+                onGuess={(lat, lng) => placeGuess(lat, lng)}
+                guessPosition={state.currentGuess}
+                realLocation={
+                  isRevealing && state.selectedLocation
+                    ? { lat: state.selectedLocation.latitude, lng: state.selectedLocation.longitude }
+                    : null
+                }
+                className="w-full h-full"
+              />
+            </div>
           </div>
-        </div>
-      </div>
 
-      {/* Result reveal overlay */}
-      {state.phase === GamePhase.REVEALING_RESULT && state.roundResults.length > 0 && (
+          {/* Action bar: hidden during reveal */}
+          {!isRevealing && (
+            <div className="flex-shrink-0 border-t border-white/5 bg-[#0d0b08]/80 backdrop-blur-xl">
+              {isGuessingPhase && (
+                <GuessConfirmation
+                  onConfirm={() => confirmGuess()}
+                  hasGuess={!!state.currentGuess}
+                  isLoading={isConfirmingPhase}
+                />
+              )}
+
+              {isConfirmingPhase && (
+                <div className="flex items-center justify-center p-4">
+                  <p className="text-sm text-white/30 flex items-center gap-2">
+                    <span className="w-4 h-4 border-2 border-red-400/30 border-t-red-400 rounded-full animate-spin" />
+                    计算中...
+                  </p>
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Result card: below map during reveal */}
+      {isRevealing && state.roundResults.length > 0 && (
         <ResultReveal
           distance={state.roundResults[state.roundResults.length - 1].distanceKm}
           score={state.roundResults[state.roundResults.length - 1].score}
@@ -167,7 +176,7 @@ export default function GamePage() {
           city={state.selectedLocation?.city || ''}
           province={state.selectedLocation?.province || ''}
           isLastRound={state.currentRoundIndex >= TOTAL_ROUNDS - 1}
-          onNextRound={() => nextRound()}
+          onNextRound={() => startTransition()}
           onViewResults={() => endGame()}
         />
       )}

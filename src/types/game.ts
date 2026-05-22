@@ -36,6 +36,7 @@ export type GameAction =
   | { type: 'PLACE_GUESS'; lat: number; lng: number }
   | { type: 'CONFIRM_GUESS' }
   | { type: 'REVEAL_COMPLETE'; distance: number; score: number }
+  | { type: 'START_TRANSITION' }
   | { type: 'NEXT_ROUND' }
   | { type: 'GAME_OVER' }
   | { type: 'RESTORE_STATE'; state: GameState };

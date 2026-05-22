@@ -53,7 +53,7 @@ export default function Leaderboard({ playerScore }: LeaderboardProps) {
               key={entry.rank}
               className={`flex items-center px-2 py-2 rounded-lg text-sm ${
                 entry.isPlayer
-                  ? 'bg-amber-500/10 border border-amber-400/20'
+                  ? 'bg-red-500/10 border border-red-400/15'
                   : 'hover:bg-white/5'
               }`}
               initial={{ opacity: 0, x: 20 }}
@@ -61,11 +61,11 @@ export default function Leaderboard({ playerScore }: LeaderboardProps) {
               transition={{ delay: 1.1 + i * 0.04, duration: 0.3 }}
             >
               <span className={`w-8 text-center font-mono ${
-                entry.rank <= 3 ? 'text-yellow-400' : 'text-white/30'
+                entry.rank <= 3 ? 'text-amber-400' : 'text-white/30'
               }`}>
                 {entry.rank <= 3 ? ['🥇', '🥈', '🥉'][entry.rank - 1] : entry.rank}
               </span>
-              <span className={`flex-1 ${entry.isPlayer ? 'text-amber-200 font-semibold' : 'text-white/70'}`}>
+              <span className={`flex-1 ${entry.isPlayer ? 'text-red-200 font-semibold' : 'text-white/70'}`}>
                 {entry.playerName}
               </span>
               <span className={`w-20 text-right font-mono tabular-nums ${entry.isPlayer ? 'text-amber-300 font-semibold' : 'text-white/40'}`}>

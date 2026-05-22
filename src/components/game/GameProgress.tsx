@@ -22,7 +22,7 @@ export default function GameProgress({ currentRound, completedResults }: GamePro
             key={i}
             className={`w-3 h-3 rounded-full transition-colors ${
               isCompleted
-                ? 'bg-amber-400'
+                ? 'bg-red-500'
                 : isCurrent
                 ? 'bg-white/60'
                 : 'bg-white/10'
