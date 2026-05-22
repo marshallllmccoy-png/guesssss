@@ -18,7 +18,7 @@ async function run() {
 
   const files = (await readdir(INPUT_DIR)).filter((f) => {
     const ext = extname(f).toLowerCase();
-    return ['.jpg', '.jpeg', '.png'].includes(ext);
+    return ['.jpg', '.jpeg', '.png', '.heic'].includes(ext);
   });
 
   if (files.length === 0) {
