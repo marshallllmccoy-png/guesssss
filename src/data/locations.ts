@@ -174,3 +174,21 @@ export function getRandomLocations(count: number): number[] {
   }
   return indices.slice(0, count);
 }
+
+export function getUnseenRandomLocations(count: number, seenIds: string[]): number[] {
+  const seenSet = new Set(seenIds);
+  const unseenIndices: number[] = [];
+  locations.forEach((loc, i) => {
+    if (!seenSet.has(loc.id)) {
+      unseenIndices.push(i);
+    }
+  });
+
+  // Shuffle unseen indices
+  for (let i = unseenIndices.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [unseenIndices[i], unseenIndices[j]] = [unseenIndices[j], unseenIndices[i]];
+  }
+
+  return unseenIndices.slice(0, Math.min(count, unseenIndices.length));
+}
