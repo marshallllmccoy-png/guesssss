@@ -217,7 +217,6 @@ export default function GuessMap({
       className={`${className} rounded-2xl overflow-hidden border border-white/5 ${
         isLocked ? 'pointer-events-none' : ''
       }`}
-      style={{ touchAction: isLocked ? 'auto' : 'none' }}
       initial={{ opacity: 0, y: '100%' }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ ...SPRING_BOUNCY, duration: 0.6 }}
@@ -225,7 +224,7 @@ export default function GuessMap({
       <div
         ref={containerRef}
         className="w-full h-full"
-        style={{ minHeight: 300, background: '#0f0f15' }}
+        style={{ minHeight: 300, background: '#0f0f15', touchAction: isLocked ? 'auto' : 'none' }}
       />
     </motion.div>
   );
