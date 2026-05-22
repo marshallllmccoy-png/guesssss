@@ -3,6 +3,7 @@
 @theme inline {
   --color-background: #0d0b08;
   --color-foreground: #faf5ee;
+  --color-score: #E56442;
   --font-sans: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Noto Sans SC', 'Helvetica Neue', sans-serif;
 }
 

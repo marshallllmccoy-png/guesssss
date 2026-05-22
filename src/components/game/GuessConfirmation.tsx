@@ -28,7 +28,7 @@ export default function GuessConfirmation({ onConfirm, hasGuess, isLoading }: Gu
               在地图上点击你要猜测的位置
             </p>
           ) : (
-            <p className="text-sm text-amber-300/60">已选择，点击按钮确认</p>
+            <p className="text-sm text-score/60">已选择，点击按钮确认</p>
           )}
         </div>
         <GlassButton

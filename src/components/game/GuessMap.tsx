@@ -61,7 +61,6 @@ export default function GuessMap({
   onGuessRef.current = onGuess;
 
   const isLocked = phase === GamePhase.CONFIRMING ||
-    phase === GamePhase.REVEALING_RESULT ||
     phase === GamePhase.ROUND_TRANSITION;
 
   const canInteract = phase === GamePhase.GUESSING || phase === GamePhase.SHOWING_LOCATION;
@@ -180,29 +179,33 @@ export default function GuessMap({
     guessMarkerRef.current = marker;
   }, [guessPosition, phase]);
 
-  // Reveal: real marker + line + fit
+  // Reveal: fly to guess → show real marker + line → pause → zoom to China
   useEffect(() => {
     const map = mapRef.current;
     if (phase !== GamePhase.REVEALING_RESULT || !realLocation || !guessPosition || !map) return;
 
-    // Real marker
+    // Show real marker + line immediately
     if (realMarkerRef.current) { map.removeLayer(realMarkerRef.current); }
     realMarkerRef.current = L.marker([realLocation.lat, realLocation.lng], {
       icon: makeRealIcon(),
     }).addTo(map);
 
-    // Line
     if (polylineRef.current) { map.removeLayer(polylineRef.current); }
     polylineRef.current = L.polyline(
       [[guessPosition.lat, guessPosition.lng], [realLocation.lat, realLocation.lng]],
       { color: '#e2483a', weight: 2, opacity: 0.7, dashArray: '10, 5' }
     ).addTo(map);
 
-    const bounds = L.latLngBounds([
-      [guessPosition.lat, guessPosition.lng],
-      [realLocation.lat, realLocation.lng],
-    ]);
-    map.fitBounds(bounds, { padding: [50, 50] });
+    // Step 1: fly to user's guess, zoom in close
+    map.flyTo([guessPosition.lat, guessPosition.lng], 11, { duration: 0.5 });
+
+    // Step 2: after 1.5s pause, zoom out to China overview
+    const timer = setTimeout(() => {
+      if (!mapRef.current) return;
+      mapRef.current.flyTo([35.0, 104.0], 5, { duration: 1.0 });
+    }, 1500);
+
+    return () => clearTimeout(timer);
   }, [phase, realLocation, guessPosition]);
 
   // Clear reveal layers on new round
@@ -226,7 +229,7 @@ export default function GuessMap({
       <div
         ref={containerRef}
         className="w-full h-full"
-        style={{ minHeight: 300, background: '#1c1a17', touchAction: isLocked ? 'auto' : 'none' }}
+        style={{ minHeight: 300, background: '#161412', touchAction: isLocked ? 'auto' : 'none' }}
       />
     </motion.div>
   );

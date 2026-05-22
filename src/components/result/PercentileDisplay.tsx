@@ -20,7 +20,7 @@ export default function PercentileDisplay({ totalScore }: PercentileDisplayProps
     >
       <p className="text-lg text-white/60 leading-relaxed">
         你的地理知识超过了{' '}
-        <span className="text-amber-300 font-bold">
+        <span className="text-score font-bold">
           <AnimatedNumber value={percentile} duration={1.5} />
           %
         </span>{' '}

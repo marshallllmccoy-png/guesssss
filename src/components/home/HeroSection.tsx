@@ -54,7 +54,7 @@ export default function HeroSection() {
         transition={{ duration: 0.8, ease: EASE_OUT }}
       >
         <motion.p
-          className="text-sm md:text-base text-amber-200/70 mb-6 tracking-widest uppercase"
+          className="text-sm md:text-base text-red-300/60 mb-6 tracking-widest uppercase"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.15, duration: 0.6 }}
@@ -68,7 +68,7 @@ export default function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.7 }}
         >
-          <span className="bg-gradient-to-r from-white via-amber-200 to-white/60 bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-white via-red-200 to-white/60 bg-clip-text text-transparent">
             探索中国
           </span>
         </motion.h1>

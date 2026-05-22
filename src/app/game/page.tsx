@@ -111,8 +111,8 @@ export default function GamePage() {
       {/* Main content */}
       {showLocation && (
         <div className="flex-1 flex flex-col">
-          <div className={`flex flex-col ${isRevealing ? '' : 'lg:flex-row'} gap-0`}>
-            {/* Image: hidden during reveal */}
+          <div className={`flex flex-col ${isRevealing ? '' : 'lg:flex-row'} gap-0 flex-1`}>
+            {/* Left: Image — hidden during reveal */}
             {!isRevealing && (
               <LocationImage
                 src={state.selectedLocation?.imageUrl}
@@ -121,49 +121,51 @@ export default function GamePage() {
               />
             )}
 
-            {/* Map: shrinks during reveal */}
+            {/* Right column: Map + Action bar (during play) or centered square Map (during reveal) */}
             <div
-              className={`w-full relative ${
+              className={`${
                 isRevealing
-                  ? 'h-[40vh] lg:h-[45vh] flex-shrink-0'
-                  : 'lg:flex-1 h-[50vh] lg:h-[calc(100vh-144px)]'
+                  ? 'w-full flex-shrink-0 flex justify-center mt-4'
+                  : 'w-full lg:flex-1 flex flex-col h-[50vh] lg:h-[calc(100vh-144px)]'
               }`}
             >
-              <GuessMap
-                phase={state.phase}
-                onGuess={(lat, lng) => placeGuess(lat, lng)}
-                guessPosition={state.currentGuess}
-                realLocation={
-                  isRevealing && state.selectedLocation
-                    ? { lat: state.selectedLocation.latitude, lng: state.selectedLocation.longitude }
-                    : null
-                }
-                className="w-full h-full"
-              />
-            </div>
-          </div>
-
-          {/* Action bar: hidden during reveal */}
-          {!isRevealing && (
-            <div className="flex-shrink-0 border-t border-white/5 bg-[#0d0b08]/80 backdrop-blur-xl">
-              {isGuessingPhase && (
-                <GuessConfirmation
-                  onConfirm={() => confirmGuess()}
-                  hasGuess={!!state.currentGuess}
-                  isLoading={isConfirmingPhase}
+              <div className={isRevealing ? 'w-[280px] h-[280px] sm:w-[320px] sm:h-[320px] relative' : 'flex-1 relative min-h-0'}>
+                <GuessMap
+                  phase={state.phase}
+                  onGuess={(lat, lng) => placeGuess(lat, lng)}
+                  guessPosition={state.currentGuess}
+                  realLocation={
+                    isRevealing && state.selectedLocation
+                      ? { lat: state.selectedLocation.latitude, lng: state.selectedLocation.longitude }
+                      : null
+                  }
+                  className="w-full h-full"
                 />
-              )}
+              </div>
 
-              {isConfirmingPhase && (
-                <div className="flex items-center justify-center p-4">
-                  <p className="text-sm text-white/30 flex items-center gap-2">
-                    <span className="w-4 h-4 border-2 border-red-400/30 border-t-red-400 rounded-full animate-spin" />
-                    计算中...
-                  </p>
+              {/* Action bar: below map during play, hidden during reveal */}
+              {!isRevealing && (
+                <div className="flex-shrink-0 border-t border-white/5 bg-[#0d0b08]/80 backdrop-blur-xl">
+                  {isGuessingPhase && (
+                    <GuessConfirmation
+                      onConfirm={() => confirmGuess()}
+                      hasGuess={!!state.currentGuess}
+                      isLoading={isConfirmingPhase}
+                    />
+                  )}
+
+                  {isConfirmingPhase && (
+                    <div className="flex items-center justify-center p-4">
+                      <p className="text-sm text-white/30 flex items-center gap-2">
+                        <span className="w-4 h-4 border-2 border-red-400/30 border-t-red-400 rounded-full animate-spin" />
+                        计算中...
+                      </p>
+                    </div>
+                  )}
                 </div>
               )}
             </div>
-          )}
+          </div>
         </div>
       )}
 

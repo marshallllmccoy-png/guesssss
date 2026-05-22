@@ -61,14 +61,14 @@ export default function Leaderboard({ playerScore }: LeaderboardProps) {
               transition={{ delay: 1.1 + i * 0.04, duration: 0.3 }}
             >
               <span className={`w-8 text-center font-mono ${
-                entry.rank <= 3 ? 'text-amber-400' : 'text-white/30'
+                entry.rank <= 3 ? 'text-score' : 'text-white/30'
               }`}>
                 {entry.rank <= 3 ? ['🥇', '🥈', '🥉'][entry.rank - 1] : entry.rank}
               </span>
               <span className={`flex-1 ${entry.isPlayer ? 'text-red-200 font-semibold' : 'text-white/70'}`}>
                 {entry.playerName}
               </span>
-              <span className={`w-20 text-right font-mono tabular-nums ${entry.isPlayer ? 'text-amber-300 font-semibold' : 'text-white/40'}`}>
+              <span className={`w-20 text-right font-mono tabular-nums ${entry.isPlayer ? 'text-score font-semibold' : 'text-white/40'}`}>
                 {entry.score.toLocaleString()}
               </span>
             </motion.div>
