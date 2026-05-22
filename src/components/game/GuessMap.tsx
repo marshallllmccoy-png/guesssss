@@ -179,7 +179,7 @@ export default function GuessMap({
     guessMarkerRef.current = marker;
   }, [guessPosition, phase]);
 
-  // Reveal: fly to guess → show real marker + line → pause → zoom to China
+  // Reveal: show real marker + line, fit both points in view
   useEffect(() => {
     const map = mapRef.current;
     if (phase !== GamePhase.REVEALING_RESULT || !realLocation || !guessPosition || !map) return;
@@ -196,16 +196,17 @@ export default function GuessMap({
       { color: '#e2483a', weight: 2, opacity: 0.7, dashArray: '10, 5' }
     ).addTo(map);
 
-    // Step 1: fly to user's guess, zoom in close
-    map.flyTo([guessPosition.lat, guessPosition.lng], 11, { duration: 0.5 });
+    // Invalidate size first — container changed from flex-1 to fixed square
+    map.invalidateSize();
 
-    // Step 2: after 1.5s pause, zoom out to China overview
-    const timer = setTimeout(() => {
-      if (!mapRef.current) return;
-      mapRef.current.flyTo([35.0, 104.0], 5, { duration: 1.0 });
-    }, 1500);
+    // Fit both points in view simultaneously
+    const bounds = L.latLngBounds(
+      [guessPosition.lat, guessPosition.lng],
+      [realLocation.lat, realLocation.lng]
+    );
+    map.fitBounds(bounds, { padding: [40, 40], maxZoom: 14, animate: true });
 
-    return () => clearTimeout(timer);
+    // No cleanup needed — no timer, no flyTo, no setZoom after fitBounds
   }, [phase, realLocation, guessPosition]);
 
   // Clear reveal layers on new round
