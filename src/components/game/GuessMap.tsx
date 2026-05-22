@@ -65,6 +65,8 @@ export default function GuessMap({
     phase === GamePhase.ROUND_TRANSITION;
 
   const canInteract = phase === GamePhase.GUESSING || phase === GamePhase.SHOWING_LOCATION;
+  const canInteractRef = useRef(canInteract);
+  canInteractRef.current = canInteract;
 
   // Init map
   useEffect(() => {
@@ -139,7 +141,7 @@ export default function GuessMap({
     }).addTo(map);
 
     map.on('click', (e: L.LeafletMouseEvent) => {
-      if (canInteract) {
+      if (canInteractRef.current) {
         onGuessRef.current(e.latlng.lat, e.latlng.lng);
       }
     });
