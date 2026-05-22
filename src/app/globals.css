@@ -1,8 +1,8 @@
 @import 'tailwindcss';
 
 @theme inline {
-  --color-background: #0d0b08;
-  --color-foreground: #faf5ee;
+  --color-background: #faf7f2;
+  --color-foreground: #1a1815;
   --color-score: #E56442;
   --font-sans: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Noto Sans SC', 'Helvetica Neue', sans-serif;
 }
@@ -12,12 +12,12 @@
 }
 
 html {
-  color-scheme: dark;
+  color-scheme: light;
 }
 
 body {
-  background: #0d0b08;
-  color: #faf5ee;
+  background: #faf7f2;
+  color: #1a1815;
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -25,17 +25,17 @@ body {
 
 /* Glass morphism utility */
 .glass {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.5);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.06);
 }
 
 .glass-strong {
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 /* Scrollbar styling */
@@ -48,16 +48,16 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.12);
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(0, 0, 0, 0.22);
 }
 
 /* Leaflet overrides */
 .leaflet-container {
-  background: #161412;
+  background: #f0ede7;
   font-family: var(--font-sans);
 }

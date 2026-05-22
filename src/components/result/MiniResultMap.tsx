@@ -83,8 +83,8 @@ export default function MiniResultMap({ guessLat, guessLng, realLat, realLng }: 
   return (
     <div
       ref={containerRef}
-      className="w-full rounded-xl overflow-hidden border border-white/5"
-      style={{ height: 200, background: '#161412' }}
+      className="w-full rounded-xl overflow-hidden border border-black/5"
+      style={{ height: 200, background: '#f0ede7' }}
     />
   );
 }

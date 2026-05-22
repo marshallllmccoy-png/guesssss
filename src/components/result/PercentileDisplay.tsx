@@ -18,7 +18,7 @@ export default function PercentileDisplay({ totalScore }: PercentileDisplayProps
       animate={{ opacity: 1 }}
       transition={{ delay: 0.8, duration: 0.6 }}
     >
-      <p className="text-lg text-white/60 leading-relaxed">
+      <p className="text-lg text-gray-600 leading-relaxed">
         你的地理知识超过了{' '}
         <span className="text-score font-bold">
           <AnimatedNumber value={percentile} duration={1.5} />
@@ -26,7 +26,7 @@ export default function PercentileDisplay({ totalScore }: PercentileDisplayProps
         </span>{' '}
         的玩家
       </p>
-      <p className="text-sm text-white/25 mt-2">
+      <p className="text-sm text-gray-400 mt-2">
         你比全国{percentile}%的人更了解中国
       </p>
     </motion.div>

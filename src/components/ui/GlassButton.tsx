@@ -15,9 +15,9 @@ interface GlassButtonProps extends HTMLMotionProps<'button'> {
 }
 
 const variantStyles: Record<ButtonVariant, string> = {
-  primary: 'bg-red-500/15 border-red-400/25 text-red-200 hover:bg-red-500/25',
-  secondary: 'bg-white/5 border-white/10 text-white/80 hover:bg-white/10',
-  ghost: 'bg-transparent border-transparent text-white/60 hover:bg-white/5 hover:text-white',
+  primary: 'bg-red-500/10 border-red-400/30 text-red-600 hover:bg-red-500/20',
+  secondary: 'bg-white/60 border-black/8 text-gray-600 hover:bg-white/80',
+  ghost: 'bg-transparent border-transparent text-gray-400 hover:bg-black/5 hover:text-gray-600',
 };
 
 const sizeStyles: Record<ButtonSize, string> = {

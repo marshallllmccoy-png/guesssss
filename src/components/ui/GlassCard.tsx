@@ -11,7 +11,7 @@ interface GlassCardProps extends HTMLMotionProps<'div'> {
 export default function GlassCard({ children, className = '', ...props }: GlassCardProps) {
   return (
     <motion.div
-      className={`backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl shadow-2xl ${className}`}
+      className={`backdrop-blur-xl bg-white/70 border border-black/6 rounded-2xl shadow-sm ${className}`}
       {...props}
     >
       {children}

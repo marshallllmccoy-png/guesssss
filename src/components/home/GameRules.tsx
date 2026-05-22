@@ -43,7 +43,7 @@ export default function GameRules() {
   return (
     <section className="px-4 py-24 max-w-5xl mx-auto">
       <motion.h2
-        className="text-2xl md:text-3xl font-semibold text-center text-white/70 mb-12"
+        className="text-2xl md:text-3xl font-semibold text-center text-gray-700 mb-12"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true, margin: '-100px' }}
@@ -63,8 +63,8 @@ export default function GameRules() {
           >
             <GlassCard className="p-8 text-center h-full">
               <div className="text-red-400 mb-5 flex justify-center">{rule.icon}</div>
-              <h3 className="text-lg font-semibold text-white/90 mb-3">{rule.title}</h3>
-              <p className="text-sm text-white/40 leading-relaxed">{rule.desc}</p>
+              <h3 className="text-lg font-semibold text-gray-800 mb-3">{rule.title}</h3>
+              <p className="text-sm text-gray-400 leading-relaxed">{rule.desc}</p>
             </GlassCard>
           </motion.div>
         ))}

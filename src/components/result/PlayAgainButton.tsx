@@ -28,7 +28,7 @@ export default function PlayAgainButton() {
           clearGameData();
           router.push('/');
         }}
-        className="mt-4 text-sm text-white/20 hover:text-white/40 transition-colors"
+        className="mt-4 text-sm text-gray-350 hover:text-gray-500 transition-colors" style={{ color: '#b0a99e' }}
       >
         返回首页
       </button>

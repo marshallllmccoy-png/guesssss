@@ -19,13 +19,13 @@ export default function ScoreSummary({ totalScore }: ScoreSummaryProps) {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
       >
-        <p className="text-sm text-white/30 uppercase tracking-widest mb-4">最终得分</p>
+        <p className="text-sm text-gray-400 uppercase tracking-widest mb-4">最终得分</p>
         <div className="flex items-baseline justify-center gap-2">
           <AnimatedNumber
             value={totalScore}
-            className="text-7xl md:text-8xl font-bold text-white tabular-nums"
+            className="text-7xl md:text-8xl font-bold text-gray-800 tabular-nums"
           />
-          <span className="text-white/20 text-lg">/ {TOTAL_MAX_SCORE.toLocaleString()}</span>
+          <span className="text-gray-300 text-lg">/ {TOTAL_MAX_SCORE.toLocaleString()}</span>
         </div>
       </motion.div>
 

@@ -30,7 +30,7 @@ export default function RoundTransition({ roundNumber, onComplete }: RoundTransi
   return (
     <AnimatePresence>
       <motion.div
-        className="fixed inset-0 z-50 flex items-center justify-center bg-[#0d0b08]"
+        className="fixed inset-0 z-50 flex items-center justify-center bg-[#faf7f2]"
         initial={{ scaleY: 0, originY: 1 }}
         animate={
           phase === 'exit'
@@ -49,8 +49,8 @@ export default function RoundTransition({ roundNumber, onComplete }: RoundTransi
           }
           transition={{ duration: 0.3, delay: phase === 'enter' ? 0.2 : 0 }}
         >
-          <p className="text-sm text-white/20 uppercase tracking-[0.3em] mb-4">第 {roundNumber} 轮</p>
-          <p className="text-white/10 text-xs tracking-widest uppercase">准备</p>
+          <p className="text-sm text-gray-400 uppercase tracking-[0.3em] mb-4">第 {roundNumber} 轮</p>
+          <p className="text-gray-300 text-xs tracking-widest uppercase">准备</p>
         </motion.div>
       </motion.div>
     </AnimatePresence>

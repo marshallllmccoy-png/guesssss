@@ -33,14 +33,14 @@ export default function StartButton() {
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.97 }}
         className="relative group px-12 py-5 text-lg font-semibold rounded-2xl
-          bg-red-500/15 backdrop-blur-xl border border-red-400/25
-          text-red-200 cursor-pointer overflow-hidden
-          hover:bg-red-500/25 transition-colors"
+          bg-red-500/10 backdrop-blur-xl border border-red-400/30
+          text-red-600 cursor-pointer overflow-hidden
+          hover:bg-red-500/20 transition-colors"
         style={{ minHeight: 56 }}
       >
         {/* Glow on hover */}
         <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300
-          bg-gradient-to-r from-red-500/10 via-transparent to-red-500/10" />
+          bg-gradient-to-r from-red-500/8 via-transparent to-red-500/8" />
 
         <span className="relative z-10 flex items-center gap-3">
           开始游戏
@@ -50,7 +50,7 @@ export default function StartButton() {
         </span>
       </motion.button>
 
-      <p className="mt-6 text-sm text-white/25">
+      <p className="mt-6 text-sm text-gray-350" style={{ color: '#b0a99e' }}>
         5 轮挑战 · 全球评分 · 无需注册
       </p>
     </section>

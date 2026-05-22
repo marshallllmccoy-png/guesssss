@@ -32,8 +32,8 @@ export default function ResultPage() {
       <div className="min-h-screen flex items-center justify-center px-4">
         <GlassCard className="p-10 text-center max-w-sm w-full">
           <div className="text-6xl mb-6">🗺️</div>
-          <h2 className="text-xl font-semibold text-white/70 mb-3">还没有游戏记录</h2>
-          <p className="text-sm text-white/30 mb-6">先完成一轮游戏，再来查看你的成绩吧</p>
+          <h2 className="text-xl font-semibold text-gray-700 mb-3">还没有游戏记录</h2>
+          <p className="text-sm text-gray-400 mb-6">先完成一轮游戏，再来查看你的成绩吧</p>
           <GlassButton
             variant="primary"
             onClick={() => {

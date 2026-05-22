@@ -145,7 +145,7 @@ export default function GamePage() {
 
               {/* Action bar: below map during play, hidden during reveal */}
               {!isRevealing && (
-                <div className="flex-shrink-0 border-t border-white/5 bg-[#0d0b08]/80 backdrop-blur-xl">
+                <div className="flex-shrink-0 border-t border-black/5 bg-white/50 backdrop-blur-xl">
                   {isGuessingPhase && (
                     <GuessConfirmation
                       onConfirm={() => confirmGuess()}
@@ -156,7 +156,7 @@ export default function GamePage() {
 
                   {isConfirmingPhase && (
                     <div className="flex items-center justify-center p-4">
-                      <p className="text-sm text-white/30 flex items-center gap-2">
+                      <p className="text-sm text-gray-400 flex items-center gap-2">
                         <span className="w-4 h-4 border-2 border-red-400/30 border-t-red-400 rounded-full animate-spin" />
                         计算中...
                       </p>

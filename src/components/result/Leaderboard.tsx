@@ -38,10 +38,10 @@ export default function Leaderboard({ playerScore }: LeaderboardProps) {
       transition={{ delay: 1, duration: 0.5 }}
     >
       <GlassCard className="p-5">
-        <h3 className="text-sm text-white/40 uppercase tracking-wider mb-4 text-center">排行榜</h3>
+        <h3 className="text-sm text-gray-400 uppercase tracking-wider mb-4 text-center">排行榜</h3>
         <div className="space-y-1">
           {/* Header */}
-          <div className="flex items-center text-xs text-white/20 uppercase tracking-wider px-2 pb-2">
+          <div className="flex items-center text-xs text-gray-350 uppercase tracking-wider px-2 pb-2" style={{ color: '#b0a99e' }}>
             <span className="w-8 text-center">#</span>
             <span className="flex-1">玩家</span>
             <span className="w-20 text-right">分数</span>
@@ -53,22 +53,22 @@ export default function Leaderboard({ playerScore }: LeaderboardProps) {
               key={entry.rank}
               className={`flex items-center px-2 py-2 rounded-lg text-sm ${
                 entry.isPlayer
-                  ? 'bg-red-500/10 border border-red-400/15'
-                  : 'hover:bg-white/5'
+                  ? 'bg-red-500/10 border border-red-400/20'
+                  : 'hover:bg-black/5'
               }`}
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 1.1 + i * 0.04, duration: 0.3 }}
             >
               <span className={`w-8 text-center font-mono ${
-                entry.rank <= 3 ? 'text-score' : 'text-white/30'
+                entry.rank <= 3 ? 'text-score' : 'text-gray-300'
               }`}>
                 {entry.rank <= 3 ? ['🥇', '🥈', '🥉'][entry.rank - 1] : entry.rank}
               </span>
-              <span className={`flex-1 ${entry.isPlayer ? 'text-red-200 font-semibold' : 'text-white/70'}`}>
+              <span className={`flex-1 ${entry.isPlayer ? 'text-red-600 font-semibold' : 'text-gray-700'}`}>
                 {entry.playerName}
               </span>
-              <span className={`w-20 text-right font-mono tabular-nums ${entry.isPlayer ? 'text-score font-semibold' : 'text-white/40'}`}>
+              <span className={`w-20 text-right font-mono tabular-nums ${entry.isPlayer ? 'text-score font-semibold' : 'text-gray-400'}`}>
                 {entry.score.toLocaleString()}
               </span>
             </motion.div>

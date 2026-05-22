@@ -24,8 +24,8 @@ export default function GameProgress({ currentRound, completedResults }: GamePro
               isCompleted
                 ? 'bg-red-500'
                 : isCurrent
-                ? 'bg-white/60'
-                : 'bg-white/10'
+                ? 'bg-gray-400'
+                : 'bg-gray-200'
             }`}
             animate={
               isCurrent

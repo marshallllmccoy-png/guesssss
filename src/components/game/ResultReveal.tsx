@@ -38,14 +38,14 @@ export default function ResultReveal({
         <GlassCard className="p-6">
           {/* Header */}
           <div className="text-center mb-4">
-            <p className="text-xs text-white/30 uppercase tracking-wider mb-1">
+            <p className="text-xs text-gray-400 uppercase tracking-wider mb-1">
               {city} · {province}
             </p>
             <div className="flex items-baseline justify-center gap-2">
-              <span className="text-3xl font-bold text-white">
+              <span className="text-3xl font-bold text-gray-800">
                 {distance < 1 ? `${(distance * 1000).toFixed(0)} m` : `${distance.toFixed(0)} km`}
               </span>
-              <span className="text-sm text-white/30">误差</span>
+              <span className="text-sm text-gray-400">误差</span>
             </div>
           </div>
 
@@ -55,11 +55,11 @@ export default function ResultReveal({
               value={score}
               className="text-5xl font-bold text-score tabular-nums"
             />
-            <p className="text-xs text-white/20 mt-1">本轮得分</p>
+            <p className="text-xs text-gray-350 mt-1" style={{ color: '#b0a99e' }}>本轮得分</p>
           </div>
 
           {/* Fun fact */}
-          <p className="text-sm text-white/40 text-center leading-relaxed mb-6 px-2">
+          <p className="text-sm text-gray-400 text-center leading-relaxed mb-6 px-2">
             {funFact}
           </p>
 

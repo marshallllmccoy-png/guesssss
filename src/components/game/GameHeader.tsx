@@ -17,13 +17,13 @@ export default function GameHeader({ round, totalRounds, score }: GameHeaderProp
       transition={{ duration: 0.4 }}
     >
       <div className="flex items-center gap-2">
-        <span className="text-xs text-white/30 uppercase tracking-wider">回合</span>
-        <span className="text-lg font-semibold text-white/90">
-          第{round}<span className="text-white/30 text-sm">/{totalRounds}</span>
+        <span className="text-xs text-gray-400 uppercase tracking-wider">回合</span>
+        <span className="text-lg font-semibold text-gray-800">
+          第{round}<span className="text-gray-300 text-sm">/{totalRounds}</span>
         </span>
       </div>
       <div className="flex items-center gap-2">
-        <span className="text-xs text-white/30 uppercase tracking-wider">得分</span>
+        <span className="text-xs text-gray-400 uppercase tracking-wider">得分</span>
         <span className="text-lg font-semibold text-score tabular-nums">{score.toLocaleString()}</span>
       </div>
     </motion.div>
