@@ -2,17 +2,17 @@
 
 import { motion } from 'framer-motion';
 import { RoundResult } from '@/types/game';
-import { TOTAL_ROUNDS } from '@/lib/constants';
 
 interface GameProgressProps {
   currentRound: number;
+  totalRounds: number;
   completedResults: RoundResult[];
 }
 
-export default function GameProgress({ currentRound, completedResults }: GameProgressProps) {
+export default function GameProgress({ currentRound, totalRounds, completedResults }: GameProgressProps) {
   return (
     <div className="flex justify-center gap-3 px-4 py-4">
-      {Array.from({ length: TOTAL_ROUNDS }, (_, i) => {
+      {Array.from({ length: totalRounds }, (_, i) => {
         const isCompleted = i < completedResults.length;
         const isCurrent = i === currentRound;
         const isUpcoming = i > currentRound;

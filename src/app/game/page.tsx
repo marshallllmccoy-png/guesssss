@@ -110,16 +110,19 @@ export default function GamePage() {
 
   const isConfirmingPhase = state.phase === GamePhase.CONFIRMING;
 
+  const actualTotalRounds = state.roundOrder.length || TOTAL_ROUNDS;
+
   return (
     <div className="min-h-screen flex flex-col">
       {/* Header */}
       <GameHeader
         round={state.currentRoundIndex + 1}
-        totalRounds={TOTAL_ROUNDS}
+        totalRounds={actualTotalRounds}
         score={state.totalScore}
       />
       <GameProgress
         currentRound={state.currentRoundIndex}
+        totalRounds={actualTotalRounds}
         completedResults={state.roundResults}
       />
 
@@ -192,7 +195,7 @@ export default function GamePage() {
           funFact={state.selectedLocation?.funFact || ''}
           city={state.selectedLocation?.city || ''}
           province={state.selectedLocation?.province || ''}
-          isLastRound={state.currentRoundIndex >= TOTAL_ROUNDS - 1}
+          isLastRound={state.currentRoundIndex >= actualTotalRounds - 1}
           onNextRound={() => startTransition()}
           onViewResults={() => endGame()}
         />
