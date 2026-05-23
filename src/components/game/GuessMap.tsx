@@ -84,55 +84,145 @@ export default function GuessMap({
       inertiaDeceleration: 3000,
     });
 
-    // Custom glass-style zoom control
-    const ZoomControl = L.Control.extend({
-      options: { position: 'topright' },
+    // Center the right-side Leaflet controls vertically
+    const styleEl = L.DomUtil.create('style', '');
+    styleEl.textContent = '.leaflet-right{top:50%!important;transform:translateY(-50%)!important;right:10px!important}';
+    document.head.appendChild(styleEl);
+
+    // Vertical zoom bar: + button, draggable slider, - button
+    const ZoomBarControl = L.Control.extend({
+      options: { position: 'topright' as L.ControlPosition },
       onAdd() {
-        const container = L.DomUtil.create('div', 'leaflet-bar leaflet-control');
-        container.style.border = 'none';
-        container.style.boxShadow = 'none';
+        const container = L.DomUtil.create('div', '');
         container.style.display = 'flex';
         container.style.flexDirection = 'column';
-        container.style.gap = '4px';
+        container.style.alignItems = 'center';
+        container.style.gap = '6px';
+
+        const TRACK_H = 132;
+        const KNOB_SIZE = 22;
+        const ZOOM_SNAP = 0.5;
 
         const btnStyle = `
-          width: 34px; height: 34px;
+          width: 32px; height: 32px;
           background: rgba(0,0,0,0.65);
           border: none;
           border-radius: 10px;
           color: rgba(255,255,255,0.9);
-          font-size: 20px;
-          font-weight: 400;
+          font-size: 18px;
           cursor: pointer;
           display: flex; align-items: center; justify-content: center;
           transition: background 0.15s;
           user-select: none;
           line-height: 1;
-          box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+          box-shadow: 0 2px 8px rgba(0,0,0,0.25);
         `;
 
+        // + button
         const zoomIn = L.DomUtil.create('button', '');
         zoomIn.innerHTML = '+';
         zoomIn.setAttribute('style', btnStyle);
         zoomIn.setAttribute('aria-label', 'Zoom in');
-        L.DomEvent.on(zoomIn, 'mouseover', () => { zoomIn.style.background = 'rgba(0,0,0,0.8)'; });
-        L.DomEvent.on(zoomIn, 'mouseout', () => { zoomIn.style.background = 'rgba(0,0,0,0.65)'; });
         L.DomEvent.on(zoomIn, 'click', (e) => { L.DomEvent.stop(e); map.zoomIn(); });
 
+        // Track wrapper
+        const trackWrap = L.DomUtil.create('div', '');
+        trackWrap.style.cssText = `position:relative;width:${KNOB_SIZE + 4}px;height:${TRACK_H}px;display:flex;align-items:center;justify-content:center;`;
+
+        // Track bar
+        const track = L.DomUtil.create('div', '');
+        track.style.cssText = `
+          width:4px;height:100%;background:rgba(255,255,255,0.22);
+          border-radius:2px;cursor:pointer;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+        `;
+        trackWrap.appendChild(track);
+
+        // Knob
+        const knob = L.DomUtil.create('div', '');
+        knob.style.cssText = `
+          width:${KNOB_SIZE}px;height:${KNOB_SIZE}px;
+          background:#fff;
+          border:2px solid rgba(0,0,0,0.12);
+          border-radius:50%;
+          position:absolute;left:50%;
+          transform:translate(-50%,-50%);
+          box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+          cursor:grab;
+          z-index:1;
+          transition: box-shadow 0.15s;
+        `;
+        trackWrap.appendChild(knob);
+
+        // − button
         const zoomOut = L.DomUtil.create('button', '');
         zoomOut.innerHTML = '−';
         zoomOut.setAttribute('style', btnStyle);
         zoomOut.setAttribute('aria-label', 'Zoom out');
-        L.DomEvent.on(zoomOut, 'mouseover', () => { zoomOut.style.background = 'rgba(0,0,0,0.8)'; });
-        L.DomEvent.on(zoomOut, 'mouseout', () => { zoomOut.style.background = 'rgba(0,0,0,0.65)'; });
         L.DomEvent.on(zoomOut, 'click', (e) => { L.DomEvent.stop(e); map.zoomOut(); });
 
         container.appendChild(zoomIn);
+        container.appendChild(trackWrap);
         container.appendChild(zoomOut);
+
+        // Sync knob position to current zoom
+        function setKnobFromZoom() {
+          const z = map.getZoom();
+          const minZ = map.getMinZoom();
+          const maxZ = map.getMaxZoom();
+          const ratio = (z - minZ) / (maxZ - minZ);
+          const y = TRACK_H * (1 - ratio);
+          knob.style.top = `${y}px`;
+        }
+        setKnobFromZoom();
+        map.on('zoom', setKnobFromZoom);
+
+        // Drag state
+        let dragging = false;
+
+        function zoomFromClientY(clientY: number) {
+          const rect = track.getBoundingClientRect();
+          const ratio = 1 - Math.max(0, Math.min(1, (clientY - rect.top) / rect.height));
+          const minZ = map.getMinZoom();
+          const maxZ = map.getMaxZoom();
+          const raw = minZ + ratio * (maxZ - minZ);
+          map.setZoom(Math.round(raw / ZOOM_SNAP) * ZOOM_SNAP);
+        }
+
+        function onDragStart(e: MouseEvent | TouchEvent) {
+          dragging = true;
+          knob.style.cursor = 'grabbing';
+          knob.style.boxShadow = '0 0 0 6px rgba(0,0,0,0.12)';
+          e.preventDefault();
+        }
+        function onDragMove(e: MouseEvent | TouchEvent) {
+          if (!dragging) return;
+          const clientY = 'touches' in e ? e.touches[0].clientY : e.clientY;
+          zoomFromClientY(clientY);
+        }
+        function onDragEnd() {
+          if (!dragging) return;
+          dragging = false;
+          knob.style.cursor = 'grab';
+          knob.style.boxShadow = '0 2px 12px rgba(0,0,0,0.25)';
+        }
+
+        knob.addEventListener('mousedown', onDragStart);
+        knob.addEventListener('touchstart', onDragStart, { passive: false });
+        document.addEventListener('mousemove', onDragMove);
+        document.addEventListener('touchmove', onDragMove, { passive: false });
+        document.addEventListener('mouseup', onDragEnd);
+        document.addEventListener('touchend', onDragEnd);
+
+        // Click track to jump zoom
+        track.addEventListener('click', (e) => {
+          zoomFromClientY(e.clientY);
+        });
+
         return container;
       },
     });
-    map.addControl(new ZoomControl());
+    map.addControl(new ZoomBarControl());
 
     L.tileLayer(TILE_URL, {
       attribution: TILE_ATTR,

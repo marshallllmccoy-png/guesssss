@@ -129,14 +129,16 @@ export default function GamePage() {
       {/* Main content */}
       {showLocation && (
         <div className="flex-1 flex flex-col">
-          <div className={`flex flex-col ${isRevealing ? '' : 'lg:flex-row'} gap-0 flex-1`}>
+          <div className={`flex flex-col ${isRevealing ? '' : 'lg:flex-row'} gap-4 lg:gap-6 flex-1 lg:px-4`}>
             {/* Left: Image — hidden during reveal */}
             {!isRevealing && (
-              <LocationImage
-                src={state.selectedLocation?.imageUrl}
-                alt={state.selectedLocation ? `${state.selectedLocation.city} · ${state.selectedLocation.province}` : ''}
-                className="w-full lg:w-[50vw] h-[35vh] lg:h-[calc(100vh-144px)]"
-              />
+              <div className="w-full lg:w-[50vw] h-[35vh] lg:h-[calc(100vh-144px)] lg:py-4">
+                <LocationImage
+                  src={state.selectedLocation?.imageUrl}
+                  alt={state.selectedLocation ? `${state.selectedLocation.city} · ${state.selectedLocation.province}` : ''}
+                  className="w-full h-full"
+                />
+              </div>
             )}
 
             {/* Right column: Map + Action bar (during play) or centered square Map (during reveal) */}
@@ -144,7 +146,7 @@ export default function GamePage() {
               className={`${
                 isRevealing
                   ? 'w-full flex-shrink-0 flex justify-center mt-4'
-                  : 'w-full lg:flex-1 flex flex-col h-[50vh] lg:h-[calc(100vh-144px)]'
+                  : 'w-full lg:flex-1 flex flex-col h-[50vh] lg:h-[calc(100vh-144px)] lg:py-4'
               }`}
             >
               <div className={isRevealing ? 'w-[280px] h-[280px] sm:w-[320px] sm:h-[320px] relative' : 'flex-1 relative min-h-0'}>

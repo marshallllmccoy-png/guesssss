@@ -18,12 +18,12 @@ export default function LocationImage({ src, alt, className = '' }: LocationImag
   }
 
   return (
-    <div className={`${className} relative overflow-hidden`}>
+    <div className={`${className} relative overflow-hidden rounded-3xl shadow-xl shadow-black/10 ring-1 ring-black/5`}>
       <motion.img
         key={src}
         src={src}
         alt={alt}
-        className="w-full h-full object-cover"
+        className="w-full h-full object-cover rounded-3xl"
         initial={{ opacity: 0, filter: 'blur(10px)' }}
         animate={{ opacity: 1, filter: 'blur(0px)' }}
         transition={{ duration: 1.2, ease: [0.25, 0.1, 0.25, 1] }}
