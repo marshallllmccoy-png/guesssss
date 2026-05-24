@@ -1,6 +1,6 @@
 import { LocationData } from '@/types/location';
 
-// 手动采集的真实照片，共 15 个地点
+// 手动采集的真实照片，共 23 个地点
 // 照片来源于旅行视频截图
 
 export const locations: LocationData[] = [
@@ -162,6 +162,76 @@ export const locations: LocationData[] = [
     latitude: 29.563,
     longitude: 106.5516,
     funFact: '重庆被称为"山城"和"8D魔幻城市"，轻轨穿楼、洪崖洞夜景、长江索道都是其标志。重庆火锅以麻辣鲜香闻名全国，是中国的"火锅之都"。',
+    difficulty: 2 as 1 | 2 | 3,
+  },
+  {
+    id: '兰州-01',
+    imageUrl: '/locations/兰州市.webp',
+    city: '兰州市',
+    province: '甘肃省',
+    latitude: 36.0611,
+    longitude: 103.8343,
+    funFact: '兰州是黄河唯一穿城而过的省会城市，兰州牛肉面被誉为"中华第一面"，讲究"一清二白三红四绿五黄"。',
+    difficulty: 2 as 1 | 2 | 3,
+  },
+  {
+    id: '大同-01',
+    imageUrl: '/locations/山西大同.webp',
+    city: '大同市',
+    province: '山西省',
+    latitude: 40.0903,
+    longitude: 113.3000,
+    funFact: '大同是北魏故都，云冈石窟是世界三大石窟之一，五万余尊造像历经1500余年风雨。大同也曾是"中国煤都"，如今正向绿色能源转型。',
+    difficulty: 2 as 1 | 2 | 3,
+  },
+  {
+    id: '静宁-01',
+    imageUrl: '/locations/平凉市 静宁县.webp',
+    city: '平凉市静宁县',
+    province: '甘肃省',
+    latitude: 35.5226,
+    longitude: 105.7321,
+    funFact: '静宁是"中国苹果之乡"，静宁苹果以色泽鲜艳、口感脆甜闻名全国，远销东南亚和欧洲。当地地处黄土高原，海拔高、日照足、昼夜温差大，含糖量高。',
+    difficulty: 3 as 1 | 2 | 3,
+  },
+  {
+    id: '丽水-01',
+    imageUrl: '/locations/浙江丽水.webp',
+    city: '丽水市',
+    province: '浙江省',
+    latitude: 28.4672,
+    longitude: 119.9228,
+    funFact: '丽水被称为"浙江绿谷"，森林覆盖率超80%，是华东地区生态屏障。瓯江穿城而过，境内有"中国最美梯田之一"的云和梯田。',
+    difficulty: 3 as 1 | 2 | 3,
+  },
+  {
+    id: '杭州-01',
+    imageUrl: '/locations/浙江杭州.webp',
+    city: '杭州市',
+    province: '浙江省',
+    latitude: 30.2741,
+    longitude: 120.1551,
+    funFact: '"上有天堂，下有苏杭"——杭州西湖是中国最具辨识度的文化景观之一，2011年列入世界文化遗产。杭州也是中国数字经济重镇，阿里巴巴总部所在。',
+    difficulty: 1 as 1 | 2 | 3,
+  },
+  {
+    id: '贵阳-01',
+    imageUrl: '/locations/贵阳.webp',
+    city: '贵阳市',
+    province: '贵州省',
+    latitude: 26.6470,
+    longitude: 106.6302,
+    funFact: '贵阳被称为"中国数谷"，是全国首个国家大数据综合试验区核心城市。夏季均温仅23°C，有"爽爽的贵阳"之誉。',
+    difficulty: 2 as 1 | 2 | 3,
+  },
+  {
+    id: '西宁-01',
+    imageUrl: '/locations/青海省西宁市.webp',
+    city: '西宁市',
+    province: '青海省',
+    latitude: 36.6171,
+    longitude: 101.7785,
+    funFact: '西宁海拔2261米，是世界高海拔城市之一，有"夏都"之称，夏季平均气温仅17-19°C。西宁是青藏高原的东方门户，古丝绸之路南路和唐蕃古道的必经之地。',
     difficulty: 2 as 1 | 2 | 3,
   },
 ];
