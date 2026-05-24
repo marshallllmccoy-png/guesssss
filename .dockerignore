@@ -1,0 +1,9 @@
+node_modules
+.next
+raw-images
+.claude
+docs
+scripts
+.git
+.gitignore
+*.md
